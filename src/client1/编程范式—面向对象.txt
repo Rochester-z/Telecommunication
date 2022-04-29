@@ -1,0 +1,1597 @@
+- 子查询
+CREATE TABLE emp(
+	empno		INT,
+	ename		VARCHAR(50),
+	job		VARCHAR(50),
+	mgr		INT,
+	hiredate	DATE,
+	sal		DECIMAL(7,2),
+	comm		DECIMAL(7,2),
+	deptno		INT
+) ;
+
+INSERT INTO emp VALUES(7369,'SMITH','CLERK',7902,'1980-12-17',800,NULL,20);
+INSERT INTO emp VALUES(7499,'ALLEN','SALESMAN',7698,'1981-02-20',1600,300,30);
+INSERT INTO emp VALUES(7521,'WARD','SALESMAN',7698,'1981-02-22',1250,500,30);
+INSERT INTO emp VALUES(7566,'JONES','MANAGER',7839,'1981-04-02',2975,NULL,20);
+INSERT INTO emp VALUES(7654,'MARTIN','SALESMAN',7698,'1981-09-28',1250,1400,30);
+INSERT INTO emp VALUES(7698,'BLAKE','MANAGER',7839,'1981-05-01',2850,NULL,30);
+INSERT INTO emp VALUES(7782,'CLARK','MANAGER',7839,'1981-06-09',2450,NULL,10);
+INSERT INTO emp VALUES(7788,'SCOTT','ANALYST',7566,'1987-04-19',3000,NULL,20);
+INSERT INTO emp VALUES(7839,'KING','PRESIDENT',NULL,'1981-11-17',5000,NULL,10);
+INSERT INTO emp VALUES(7844,'TURNER','SALESMAN',7698,'1981-09-08',1500,0,30);
+INSERT INTO emp VALUES(7876,'ADAMS','CLERK',7788,'1987-05-23',1100,NULL,20);
+INSERT INTO emp VALUES(7900,'JAMES','CLERK',7698,'1981-12-03',950,NULL,30);
+INSERT INTO emp VALUES(7902,'FORD','ANALYST',7566,'1981-12-03',3000,NULL,20);
+INSERT INTO emp VALUES(7934,'MILLER','CLERK',7782,'1982-01-23',1300,NULL,10);
+
+
+
+
+CREATE TABLE dept(
+	deptno		INT,
+	dname		VARCHAR(14),
+	loc		VARCHAR(13)
+);
+
+INSERT INTO dept VALUES(10, 'ACCOUNTING', 'NEW YORK');
+INSERT INTO dept VALUES(20, 'RESEARCH', 'DALLAS');
+INSERT INTO dept VALUES(30, 'SALES', 'CHICAGO');
+INSERT INTO dept VALUES(40, 'OPERATIONS', 'BOSTON');
+
+
+
+
+
+
+
+```sql
+-- 单行子查询(> < >= <= = <>)
+	-- 查询出高于10号部门的平均工资的员工信息
+
+-- 多行子查询(in  not in any all)
+	-- 查询出比10号部门任何员工薪资高的员工信息
+
+-- 多列子查询(实际使用较少)
+	-- 和10号部门同名同工作的员工信息
+
+-- select 后面接子查询	
+	-- 获取员工的名字和部门的名字
+	
+-- from 后面接子查询
+    -- 查询emp表中经理信息
+	
+-- where 后面接子查询	
+	-- 薪资高于10号部门平均工资的所有员工信息
+	
+-- group by 后面接子查询
+	-- 有哪些部门的平均工资高于30号部门的平均工资
+
+	
+-- 工资>JONES工资
+-- 查询与SCOTT同一个部门的员工
+-- 工资高于30号部门所有人的员工信息
+-- 查询工作和工资与MARTIN完全相同的员工信息
+-- 有两个以上直接下属的员工信息
+-- 查询员工编号为7788的员工名称,员工工资,部门名称,部门地址
+
+```
+
+- SQL查询的综合案例
+jtest. 查询出高于本部门平均工资的员工信息
+2. 列出达拉斯加工作的人中,比纽约平均工资高的人
+3. 查询7369员工编号,姓名,经理编号和经理姓名
+4. 查询出各个部门薪水最高的员工所有信息
+
+
+
+#### 面试题
+
+```sql
+CREATE TABLE test(
+NAME CHAR(20),
+kecheng CHAR(20),
+fenshu CHAR(20)
+);
+
+INSERT INTO test VALUES('张三','语文',81),
+('张三','数学',75),
+('李四','语文',76),
+('李四','数学',90),
+('王五','语文',81),
+('王五','数学',82);
+
+--请用一条Sql语句查处分数大于80的学生
+```
+
+CREATE TABLE emp(
+	empno INT,
+	ename VARCHAR(50),
+	job VARCHAR(50),
+	mgr	INT,
+	hiredate DATE,
+	sal	DECIMAL(7,2),
+	comm DECIMAL(7,2),
+	deptno INT
+) ;
+
+INSERT INTO emp VALUES(7369,'SMITH','CLERK',7902,'1980-12-17',800,NULL,20);
+INSERT INTO emp VALUES(7499,'ALLEN','SALESMAN',7698,'1981-02-20',1600,300,30);
+INSERT INTO emp VALUES(7521,'WARD','SALESMAN',7698,'1981-02-22',1250,500,30);
+INSERT INTO emp VALUES(7566,'JONES','MANAGER',7839,'1981-04-02',2975,NULL,20);
+INSERT INTO emp VALUES(7654,'MARTIN','SALESMAN',7698,'1981-09-28',1250,1400,30);
+INSERT INTO emp VALUES(7698,'BLAKE','MANAGER',7839,'1981-05-01',2850,NULL,30);
+INSERT INTO emp VALUES(7782,'CLARK','MANAGER',7839,'1981-06-09',2450,NULL,10);
+INSERT INTO emp VALUES(7788,'SCOTT','ANALYST',7566,'1987-04-19',3000,NULL,20);
+INSERT INTO emp VALUES(7839,'KING','PRESIDENT',NULL,'1981-11-17',5000,NULL,10);
+INSERT INTO emp VALUES(7844,'TURNER','SALESMAN',7698,'1981-09-08',1500,0,30);
+INSERT INTO emp VALUES(7876,'ADAMS','CLERK',7788,'1987-05-23',1100,NULL,20);
+INSERT INTO emp VALUES(7900,'JAMES','CLERK',7698,'1981-12-03',950,NULL,30);
+INSERT INTO emp VALUES(7902,'FORD','ANALYST',7566,'1981-12-03',3000,NULL,20);
+INSERT INTO emp VALUES(7934,'MILLER','CLERK',7782,'1982-01-23',1300,NULL,10);
+INSERT INTO emp VALUES(7981,'MILLER','CLERK',7788,'1992-01-23',2600,500,20);
+
+
+
+
+
+create table company(
+    companyid varchar(20),    
+)
+
+cerate table BandAccount(
+    Account varchar(20),
+    uno,         //一个公司对应多个银行账号，属于一对多关系
+    uscene          //不同业务类型使用不同的银行账号，属于1对1关系
+    foreign key(uno) reference company(companyid)
+    
+)
+
+jtest.查询公司C
+seclet * from company where company = c;
+2.查询C的所有银行账号
+select * from BandAccount where uno = (seclet * from company where company = 'c');
+3.查询C在业务类型A下的所有银行账号
+select * from BandAccount where uno = (seclet * from company where company = 'c') and uscene=A;
+
+​	SELECT * FROM emp WHERE deptno = (SELECT deptno FROM dept WHERE loc='DALLAS');
+
+
+CREATE TABLE dept(
+	deptno		INT,
+	dname		VARCHAR(14),
+	loc		VARCHAR(13)
+);
+
+INSERT INTO dept VALUES(10, 'ACCOUNTING', 'NEW YORK');
+INSERT INTO dept VALUES(20, 'RESEARCH', 'DALLAS');
+INSERT INTO dept VALUES(30, 'SALES', 'CHICAGO');
+INSERT INTO dept VALUES(40, 'OPERATIONS', 'BOSTON');
+
+
+DESC SELECT dname FROM dept WHERE deptno=10;
+
+
+-- 单行子查询(> < >= <= = <>)
+	-- 查询出高于10号部门的平均工资的员工信息
+	jtest.查询出10号部门的平均工资
+	SELECT AVG(sal) FROM emp WHERE deptno = 10;
+	2.查询出高于10号部门平均工资的员工信息
+	SELECT * FROM emp WHERE sal > (SELECT AVG(sal) FROM emp WHERE deptno = 10);
+-- 多行子查询(in  not in any all)    >any  >all
+	-- 查询出比10号部门任何员工薪资高的员工信息
+	jtest. 查询出10号部门的所有工资信息
+	SELECT sal FROM emp WHERE deptno=10;
+	2.得出结果
+	SELECT * FROM emp WHERE sal >ALL(SELECT sal FROM emp WHERE deptno=10); 
+
+-- 多列子查询(实际使用较少)   in
+	-- 和10号部门同名同工作的员工信息
+	jtest.查出10号部门员工名字和工作信息
+	SELECT ename,job FROM emp WHERE deptno=10;
+	2. 得出结果:
+	SELECT * FROM emp WHERE (ename,job) IN (SELECT ename,job FROM emp WHERE deptno=10) AND deptno!=10;
+	-- Select接子查询
+	-- 获取员工的名字和部门的名字
+	jtest.查出员工的名字和部门编号信息
+	SELECT ename,deptno FROM emp;
+	2.得出结果
+	SELECT ename,(SELECT dname FROM dept WHERE dept.deptno=emp.deptno) FROM emp;
+	-- from后面接子查询
+	-- 查询emp表中经理信息
+	jtest.查询出所有经理的ID
+	SELECT DISTINCT mgr FROM emp;
+	2. 查出经理的信息,只要id在第一步的查询结果中就可以了
+	SELECT * FROM emp,(SELECT DISTINCT mgr FROM emp) mgrs WHERE emp.empno = mgrs.mgr;
+	-- where 接子查询
+	-- 薪资高于10号部门平均工资的所有员工信息
+	jtest.查询出10号部门的平均工资
+	SELECT AVG(sal) FROM emp WHERE deptno=10;
+	2.得出结果:
+	SELECT * FROM emp WHERE sal > (SELECT AVG(sal) FROM emp WHERE deptno=10);
+	-- having后面接子查询
+	-- 有哪些部门的平均工资高于30号部门的平均工资
+	jtest.30号部门的平均工资
+	SELECT AVG(sal) FROM emp WHERE deptno=30;
+	2. 统计所有部门的平均工资
+	SELECT deptno,AVG(sal) FROM emp GROUP BY deptno ;
+	3. 得出最终的结果
+		SELECT deptno,AVG(sal) FROM emp GROUP BY deptno HAVING AVG(sal) > (SELECT AVG(sal) FROM emp WHERE deptno=30);
+		
+
+-- 工资>JONES工资的员工信息
+	jtest.查处JONES的工资信息
+	SELECT sal FROM emp WHERE ename='JONES';
+	2.得出结果
+	SELECT * FROM emp WHERE sal > (SELECT sal FROM emp WHERE ename='JONES');
+-- 查询与SCOTT同一个部门的员工
+	jtest.查处SCOTT的部门编号
+	SELECT deptno FROM emp WHERE ename = 'SCOTT';
+	2.得出结果
+	SELECT * FROM emp WHERE deptno = (SELECT deptno FROM emp WHERE ename = 'SCOTT');
+-- 工资高于30号部门所有人的员工信息
+	jtest.得出30号部门的最大工资
+	SELECT MAX(sal) FROM emp WHERE deptno = 30;
+	2.得出结果
+	SELECT * FROM emp WHERE sal > (SELECT MAX(sal) FROM emp WHERE deptno = 30);
+-- 查询工作和工资与MARTIN完全相同的员工信息
+	jtest.查处MARTIN的工作和工资
+	SELECT job,sal FROM emp WHERE ename='MARTIN';
+	2.得出结果
+	SELECT * FROM emp WHERE (job,sal) IN (SELECT job,sal FROM emp WHERE ename='MARTIN');
+-- 有两个以上直接下属的员工信息
+	jtest.查出emp表中mgr信息
+	SELECT mgr FROM emp;
+	2.分组统计mgr的信息
+	SELECT mgr,COUNT(*) FROM emp GROUP BY mgr HAVING COUNT(*)>2;
+	3.得出结果
+	SELECT * FROM emp e1 WHERE e1.empno IN (SELECT e2.mgr FROM emp e2 GROUP BY e2.mgr HAVING COUNT(*)>2);
+-- 查询员工编号为7788的员工名称,员工工资,部门名称,部门地址
+	jtest.将员工表和部门表链接起来
+	SELECT * FROM emp ,dept WHERE emp.deptno = dept.deptno;
+	2.得出ID为7788的所有信息
+	SELECT * FROM emp ,dept WHERE emp.deptno = dept.deptno AND empno=7788;
+	3.只显示其中的需要的信息
+	SELECT ename,sal ,dname, loc FROM emp ,dept WHERE emp.deptno = dept.deptno AND empno=7788;
+
+-- jtest. 查询出高于本部门平均工资的员工信息
+	jtest. 分组统计每个部门的平均工资
+	SELECT deptno,AVG(sal) FROM emp GROUP BY deptno;
+	2. 得出相应的结果
+	SELECT * FROM emp e1 WHERE e1.sal > (SELECT AVG(e2.sal) FROM emp e2 WHERE e1.deptno=e2.deptno  GROUP BY e2.deptno);
+	
+
+-- jtest. 列出达拉斯加工作的人中,比纽约平均工资高的人
+	0. 查处DALLAS 的部门编号
+	SELECT deptno FROM dept WHERE loc='DALLAS';
+	jtest.查处达拉斯工作的人的信息
+	SELECT * FROM emp WHERE deptno = (SELECT deptno FROM dept WHERE loc='DALLAS');
+	2. 查处纽约的部门编号
+	SELECT deptno FROM dept WHERE loc='NEW YORK';
+	3. 查村纽约平均工资
+	SELECT AVG(sal) FROM emp WHERE deptno = (SELECT deptno FROM dept WHERE loc='NEW YORK');
+	4.得出结果:
+	SELECT * FROM emp WHERE deptno = (SELECT deptno FROM dept WHERE loc='DALLAS')
+	AND sal > (SELECT AVG(sal) FROM emp WHERE deptno = (SELECT deptno FROM dept WHERE loc='NEW YORK'));
+	
+	
+
+-- 2. 查询7369员工编号,姓名,经理编号和经理姓名
+	SELECT e1.empno,e1.ename,e1.mgr,mgrtable.ename FROM emp e1,emp mgrtable WHERE e1.mgr = mgrtable.empno; 
+	
+-- 3. 查询出各个部门薪水最高的员工所有信息
+	jtest.分组统计每个部门员工最高的薪资是多少
+	SELECT MAX(sal),deptno FROM emp GROUP BY deptno;
+	2.算出结果
+	SELECT * FROM emp e1 WHERE e1.sal = (SELECT MAX(sal) FROM emp e2 WHERE e1.deptno = e2.deptno GROUP BY deptno);
+	
+	
+CREATE TABLE test(
+  NAME CHAR(20),
+  kecheng CHAR(20),
+  fenshu CHAR(20)
+);
+
+INSERT INTO test VALUES
+('张三','语文',81),
+('张三','数学',75),
+('李四','语文',76),
+('李四','数学',90),
+('王五','语文',81),
+('王五','数学',82);
+
+
+SELECT NAME FROM test WHERE fenshu < 80 ;
+SELECT NAME FROM test WHERE NAME NOT IN(SELECT NAME FROM test WHERE fenshu < 80 );
+
+
+set names gbk; 改变cmd编码方式
+
+mysql -uroot -proot
+
+show databases;
+
+use day02;
+
+show tables;
+
+select * from student;
+
+delete from table student where
+
+商品分类:
+jtest.分类的ID
+
+2.分类名称
+
+3.分类描述
+
+create table category(
+
+cid int primary key auto_increment,
+
+cname varchar(10),
+
+cdesc varchar(31)
+
+)
+
+insert into category values(null, '手机数码', '电子厂品,黑马生产');
+
+insert into category values(null, '鞋靴箱包', '江南皮革厂倾情打造');
+
+insert into category values(null, '香烟酒水', '黄鹤楼,茅台,二锅头');
+
+insert into category values(null, '酸奶饼干', '娃哈哈,蒙牛酸酸乳');
+
+insert into category values(null, '馋嘴零食', '瓜子花生,八宝粥');
+
+
+
+所有商品
+
+jtest.商品ID
+
+2.商品名称
+
+3.商品的价格
+
+4.生产价格
+
+5.商品分类ID
+
+
+
+商品和商品分类:所属关系
+
+
+
+create table product(
+
+pid int primary key auto_increment,
+
+pname varchar(10),
+
+price double,
+
+pdate timestamp,
+
+cno int
+
+);
+
+//timestamp默认当前时间
+
+
+
+insert into product value(null,'小米mix8',998,null,jtest);
+
+insert into product value(null,'锤子',2888,null,jtest);
+
+insert into product value(null,'老村长',5,null,3);
+
+insert into product value(null,'劲酒',35,null,3);
+
+insert into product value(null,'小熊饼干',jtest,null,4);
+
+insert into product value(null,'薯片',5,null,5);
+
+insert into product value(null,'旺旺大饼',jtest,null,5);
+
+
+
+查询所有的商品 select选择显示哪些列的内容
+
+select * from product;
+
+查询商品名称和商品价格
+
+select pname, price from product;
+
+
+
+别名查询: as的关键字 as关键字可以省略
+
+表别名
+
+select p.pname, p.price from product as p;
+
+列别名
+
+select pname as 商品名称, price as 商品价格 from product;
+
+
+
+去掉重复的值
+
+查询商品的所有的价格
+
+select price from product;
+
+select distinct price from product;
+
+
+
+select运算查询 *代表所有的列(仅仅在所有查询结果上做了运算+ - * /)
+
+select *, price*jtest.5 as 折后价 from product;
+
+
+
+条件查询(where 关键字)
+
+指定条件,确定要操作的记录
+
+
+
+查询商品价格>60元的所有商品信息 
+
+select * from product where price>60;
+
+
+
+关系运算符:>  >=  <  <=  !=  
+
+<> : 不等于 标准sql语法
+
+!= : 非标准
+
+ 大于小于 >10 and <100 或 select * from product where price between 10 and 100
+
+
+
+逻辑运算: and or not
+
+
+
+
+
+复杂查询
+
+like: 模糊查询
+
+-: 代表的是一个字符
+
+%: 代表的是多个字符
+
+
+
+查询出名字中带有饼的所有商品  '%饼%'
+
+select * from product where pname like '%饼%';  //不论第几个
+
+查询第三个名字是饼的所有商品 '__饼%'
+
+select * from product where pname like '__饼%'; //第二个字
+
+
+
+in 在某个范围中获得值
+
+查询出商品分类ID在1,4,5里面的所有商品
+
+select * from product where cno in (jtest,4,5);
+
+
+
+排序查询:order by 关键字 方式
+
+asc:升序(默认)
+
+desc: 降序
+
+查询所有商品,按照价格进行排序
+
+select * from product order by price desc;
+
+查询名称中有 小 的商品,按价格降序排序
+
+jtest.
+
+select * from product where pname like '%小%';
+
+2.排序 
+
+select * from product where pname like '%小% order by;
+
+
+
+聚合函数
+
+sum() :求和
+
+avg() :求平均值
+
+count: 统计数量
+
+max: 最大值
+
+min: 最小值
+
+jtest.获得所有商品价格总和:
+select sum(price) from product;
+
+2.获得所有商品价格平均价格:
+
+select avg(price) from product;
+
+3.获得所有商品的个数
+
+select count(*) from product;
+
+注意: where条件后面不能接聚合函数
+
+select * from product where price > avg(price);
+
+4.查出商品价格大于平均价格的所有商品
+
+.查出所有商品
+
+select * from product;
+
+平均价格
+
+select avg(price) from product;
+
+子查询
+
+select * from product where price > (select avg(price) from product);
+
+
+
+
+
+分组: group by 
+
+jtest.根据cno字段分组,分组后统计结果  -根据每组元素个数
+
+select cno, count(*) from product group by cno;
+
+2.根据cno分组,分组后统计每组商品的平均价格,并且商品平均价格>60
+
+select cno, avg(price) 
+
+from product group by cno 
+
+having avg(price) > 60;
+
+having关键字,可以接聚合函数,出现在分组之后
+
+where关键字后不可接聚合函数,出现在分组前
+
+
+
+selectl编写顺序
+
+S F W G H O
+
+select ...from...where...group by...having...order by
+
+执行顺序
+
+F...W...G...H...S...O
+
+from...where...group by...having...select...order by
+
+从哪张表 条件判断 对表分组 条件筛选 控制显示的 结果排序
+
+
+
+
+
+```sql
+create table category(
+
+cid int primary key auto_increment,
+
+cname varchar(10),
+
+cdesc varchar(31)
+
+);
+
+insert into category values(null, '手机数码', '电子厂品,黑马生产');
+
+insert into category values(null, '鞋靴箱包', '江南皮革厂倾情打造');
+
+insert into category values(null, '香烟酒水', '黄鹤楼,茅台,二锅头');
+
+insert into category values(null, '酸奶饼干', '娃哈哈,蒙牛酸酸乳');
+
+insert into category values(null, '馋嘴零食', '瓜子花生,八宝粥');
+
+
+create table product(
+
+pid int primary key auto_increment,
+
+pname varchar(10),
+
+price double,
+
+pdate timestamp,
+
+cno int
+
+);
+
+
+insert into product value(null,'小米mix8',998,null,jtest);
+
+insert into product value(null,'锤子',2888,null,jtest);
+
+insert into product value(null,'老村长',5,null,3);
+
+insert into product value(null,'劲酒',35,null,3);
+
+insert into product value(null,'小熊饼干',jtest,null,4);
+
+insert into product value(null,'薯片',5,null,5);
+
+insert into product value(null,'旺旺大饼',jtest,null,5);
+//插入数据会失败	
+insert into product value(null,'充气的',jtest,null,12);
+```
+
+
+
+多表之间关系如何来维护?
+外键约束: foreign key
+
+alter table product add foreign key(cno) references category(cid);
+
+
+
+网上商城市里的分析:用户购物流程
+
+用户表(用户的ID,用户名,密码,手机)
+
+```sql
+create table user(
+    uid int primary key auto_increment,
+    username varchar(31),
+    password varchar(31),
+    phone varchar(11)
+);
+
+insert into user values(jtest,'zhangsan','123','13811118833')
+
+
+```
+
+订单表(订单编号,总价,订单时间,地址,外键用户的ID)
+
+```sql
+create table orders(
+    oid int primary key auto_increment,
+    sum int not null,
+    otime timestamp,
+    address varchar(100),
+    uno int,
+    foreign key(uno) references user(uid)
+);
+
+insert into orders values(jtest,200,null,'黑马前台旁边小黑屋',jtest);
+insert into orders values(2,250,null,'黑马后台旁边1702',jtest);
+
+
+
+create table company(
+    companyid varchar(20) primary key,
+    
+)
+
+cerate table BandAccount(
+    Account varchar(20) primary key,
+    uno,         //一个公司对应多个银行账号，属于一对多关系
+    useece          //不同业务类型使用不同的银行账号，属于1对1关系
+    foreign key(uno) reference company(companyid)
+    
+)
+
+jtest.查询公司C
+seclet * from company where company = c;
+2.查询C的所有银行账号
+select * from BandAccount where uno = (seclet * from company where company = 'c');
+3.查询C在业务类型A下的所有银行账号
+select * from BandAccount where uno = (seclet * from company where company = 'c') uscene='A';
+
+
+```
+
+
+
+商品表(商品ID,商品名称,商品价格,外键cno)
+
+```sql
+create table product(
+    pid int primary key auto_increment,
+    pname varchar(10),
+    price double,
+    cno int,
+    foreign key(cno) references category(cid)
+   );
+   
+insert into product value(null,'小米mix8',998,jtest);
+
+insert into product value(null,'锤子',2888,jtest);
+
+insert into product value(null,'老村长',5,3);
+
+insert into product value(null,'劲酒',35,3);
+
+insert into product value(null,'小熊饼干',jtest,4);
+
+insert into product value(null,'薯片',5,5);
+
+insert into product value(null,'旺旺大饼',jtest,5);
+
+
+```
+
+
+
+商品分类表(分类ID,分类名称,分类描述)
+
+```sql
+create table category(
+    cid int primary key auto_increment,
+    cname varchar(15),
+    cdesc varchar(100)
+);
+insert into category values(null, '手机数码', '电子厂品,黑马生产');
+
+insert into category values(null, '鞋靴箱包', '江南皮革厂倾情打造');
+
+insert into category values(null, '香烟酒水', '黄鹤楼,茅台,二锅头');
+
+insert into category values(null, '酸奶饼干', '娃哈哈,蒙牛酸酸乳');
+
+insert into category values(null, '馋嘴零食', '瓜子花生,八宝粥');
+
+
+```
+
+订单项:中间表(订单ID,商品ID,商品数量,订单项总价)
+
+//名字不重复
+
+```sql
+create table orderitem(
+    ono int,   
+    pno int,
+    foreign key(ono) references orders(oid),
+    foreign key(pno) references product(pid),
+    ocount int,
+    subsum double
+);
+
+--给1号订单添加商品 200块钱商品
+insert into orderitem values(jtest,7,100,100);
+insert into orderitem values(jtest,5,20,100);
+
+--给2号订单添加商品 250块钱商品
+insert into orderitem values(2,4,jtest,35);
+insert into orderitem values(2,5,10,50);
+
+- 子查询
+CREATE TABLE emp(
+	empno		INT,
+	ename		VARCHAR(50),
+	job		VARCHAR(50),
+	mgr		INT,
+	hiredate	DATE,
+	sal		DECIMAL(7,2),
+	comm		DECIMAL(7,2),
+	deptno		INT
+) ;
+
+INSERT INTO emp VALUES(7369,'SMITH','CLERK',7902,'1980-12-17',800,NULL,20);
+INSERT INTO emp VALUES(7499,'ALLEN','SALESMAN',7698,'1981-02-20',1600,300,30);
+INSERT INTO emp VALUES(7521,'WARD','SALESMAN',7698,'1981-02-22',1250,500,30);
+INSERT INTO emp VALUES(7566,'JONES','MANAGER',7839,'1981-04-02',2975,NULL,20);
+INSERT INTO emp VALUES(7654,'MARTIN','SALESMAN',7698,'1981-09-28',1250,1400,30);
+INSERT INTO emp VALUES(7698,'BLAKE','MANAGER',7839,'1981-05-01',2850,NULL,30);
+INSERT INTO emp VALUES(7782,'CLARK','MANAGER',7839,'1981-06-09',2450,NULL,10);
+INSERT INTO emp VALUES(7788,'SCOTT','ANALYST',7566,'1987-04-19',3000,NULL,20);
+INSERT INTO emp VALUES(7839,'KING','PRESIDENT',NULL,'1981-11-17',5000,NULL,10);
+INSERT INTO emp VALUES(7844,'TURNER','SALESMAN',7698,'1981-09-08',1500,0,30);
+INSERT INTO emp VALUES(7876,'ADAMS','CLERK',7788,'1987-05-23',1100,NULL,20);
+INSERT INTO emp VALUES(7900,'JAMES','CLERK',7698,'1981-12-03',950,NULL,30);
+INSERT INTO emp VALUES(7902,'FORD','ANALYST',7566,'1981-12-03',3000,NULL,20);
+INSERT INTO emp VALUES(7934,'MILLER','CLERK',7782,'1982-01-23',1300,NULL,10);
+
+
+
+
+CREATE TABLE dept(
+	deptno		INT,
+	dname		VARCHAR(14),
+	loc		VARCHAR(13)
+);
+
+INSERT INTO dept VALUES(10, 'ACCOUNTING', 'NEW YORK');
+INSERT INTO dept VALUES(20, 'RESEARCH', 'DALLAS');
+INSERT INTO dept VALUES(30, 'SALES', 'CHICAGO');
+INSERT INTO dept VALUES(40, 'OPERATIONS', 'BOSTON');
+
+
+
+
+
+
+
+```sql
+-- 单行子查询(> < >= <= = <>)
+	-- 查询出高于10号部门的平均工资的员工信息
+
+-- 多行子查询(in  not in any all)
+	-- 查询出比10号部门任何员工薪资高的员工信息
+
+-- 多列子查询(实际使用较少)
+	-- 和10号部门同名同工作的员工信息
+
+-- select 后面接子查询	
+	-- 获取员工的名字和部门的名字
+	
+-- from 后面接子查询
+    -- 查询emp表中经理信息
+	
+-- where 后面接子查询	
+	-- 薪资高于10号部门平均工资的所有员工信息
+	
+-- group by 后面接子查询
+	-- 有哪些部门的平均工资高于30号部门的平均工资
+
+	
+-- 工资>JONES工资
+-- 查询与SCOTT同一个部门的员工
+-- 工资高于30号部门所有人的员工信息
+-- 查询工作和工资与MARTIN完全相同的员工信息
+-- 有两个以上直接下属的员工信息
+-- 查询员工编号为7788的员工名称,员工工资,部门名称,部门地址
+
+```
+
+- SQL查询的综合案例
+jtest. 查询出高于本部门平均工资的员工信息
+2. 列出达拉斯加工作的人中,比纽约平均工资高的人
+3. 查询7369员工编号,姓名,经理编号和经理姓名
+4. 查询出各个部门薪水最高的员工所有信息
+
+
+
+#### 面试题
+
+```sql
+CREATE TABLE test(
+NAME CHAR(20),
+kecheng CHAR(20),
+fenshu CHAR(20)
+);
+
+INSERT INTO test VALUES('张三','语文',81),
+('张三','数学',75),
+('李四','语文',76),
+('李四','数学',90),
+('王五','语文',81),
+('王五','数学',82);
+
+--请用一条Sql语句查处分数大于80的学生
+```
+
+CREATE TABLE emp(
+	empno INT,
+	ename VARCHAR(50),
+	job VARCHAR(50),
+	mgr	INT,
+	hiredate DATE,
+	sal	DECIMAL(7,2),
+	comm DECIMAL(7,2),
+	deptno INT
+) ;
+
+INSERT INTO emp VALUES(7369,'SMITH','CLERK',7902,'1980-12-17',800,NULL,20);
+INSERT INTO emp VALUES(7499,'ALLEN','SALESMAN',7698,'1981-02-20',1600,300,30);
+INSERT INTO emp VALUES(7521,'WARD','SALESMAN',7698,'1981-02-22',1250,500,30);
+INSERT INTO emp VALUES(7566,'JONES','MANAGER',7839,'1981-04-02',2975,NULL,20);
+INSERT INTO emp VALUES(7654,'MARTIN','SALESMAN',7698,'1981-09-28',1250,1400,30);
+INSERT INTO emp VALUES(7698,'BLAKE','MANAGER',7839,'1981-05-01',2850,NULL,30);
+INSERT INTO emp VALUES(7782,'CLARK','MANAGER',7839,'1981-06-09',2450,NULL,10);
+INSERT INTO emp VALUES(7788,'SCOTT','ANALYST',7566,'1987-04-19',3000,NULL,20);
+INSERT INTO emp VALUES(7839,'KING','PRESIDENT',NULL,'1981-11-17',5000,NULL,10);
+INSERT INTO emp VALUES(7844,'TURNER','SALESMAN',7698,'1981-09-08',1500,0,30);
+INSERT INTO emp VALUES(7876,'ADAMS','CLERK',7788,'1987-05-23',1100,NULL,20);
+INSERT INTO emp VALUES(7900,'JAMES','CLERK',7698,'1981-12-03',950,NULL,30);
+INSERT INTO emp VALUES(7902,'FORD','ANALYST',7566,'1981-12-03',3000,NULL,20);
+INSERT INTO emp VALUES(7934,'MILLER','CLERK',7782,'1982-01-23',1300,NULL,10);
+INSERT INTO emp VALUES(7981,'MILLER','CLERK',7788,'1992-01-23',2600,500,20);
+
+
+
+
+
+create table company(
+    companyid varchar(20),    
+)
+
+cerate table BandAccount(
+    Account varchar(20),
+    uno,         //一个公司对应多个银行账号，属于一对多关系
+    uscene          //不同业务类型使用不同的银行账号，属于1对1关系
+    foreign key(uno) reference company(companyid)
+    
+)
+
+jtest.查询公司C
+seclet * from company where company = c;
+2.查询C的所有银行账号
+select * from BandAccount where uno = (seclet * from company where company = 'c');
+3.查询C在业务类型A下的所有银行账号
+select * from BandAccount where uno = (seclet * from company where company = 'c') and uscene=A;
+
+​	SELECT * FROM emp WHERE deptno = (SELECT deptno FROM dept WHERE loc='DALLAS');
+
+
+CREATE TABLE dept(
+	deptno		INT,
+	dname		VARCHAR(14),
+	loc		VARCHAR(13)
+);
+
+INSERT INTO dept VALUES(10, 'ACCOUNTING', 'NEW YORK');
+INSERT INTO dept VALUES(20, 'RESEARCH', 'DALLAS');
+INSERT INTO dept VALUES(30, 'SALES', 'CHICAGO');
+INSERT INTO dept VALUES(40, 'OPERATIONS', 'BOSTON');
+
+
+DESC SELECT dname FROM dept WHERE deptno=10;
+
+
+-- 单行子查询(> < >= <= = <>)
+	-- 查询出高于10号部门的平均工资的员工信息
+	jtest.查询出10号部门的平均工资
+	SELECT AVG(sal) FROM emp WHERE deptno = 10;
+	2.查询出高于10号部门平均工资的员工信息
+	SELECT * FROM emp WHERE sal > (SELECT AVG(sal) FROM emp WHERE deptno = 10);
+-- 多行子查询(in  not in any all)    >any  >all
+	-- 查询出比10号部门任何员工薪资高的员工信息
+	jtest. 查询出10号部门的所有工资信息
+	SELECT sal FROM emp WHERE deptno=10;
+	2.得出结果
+	SELECT * FROM emp WHERE sal >ALL(SELECT sal FROM emp WHERE deptno=10); 
+
+-- 多列子查询(实际使用较少)   in
+	-- 和10号部门同名同工作的员工信息
+	jtest.查出10号部门员工名字和工作信息
+	SELECT ename,job FROM emp WHERE deptno=10;
+	2. 得出结果:
+	SELECT * FROM emp WHERE (ename,job) IN (SELECT ename,job FROM emp WHERE deptno=10) AND deptno!=10;
+	-- Select接子查询
+	-- 获取员工的名字和部门的名字
+	jtest.查出员工的名字和部门编号信息
+	SELECT ename,deptno FROM emp;
+	2.得出结果
+	SELECT ename,(SELECT dname FROM dept WHERE dept.deptno=emp.deptno) FROM emp;
+	-- from后面接子查询
+	-- 查询emp表中经理信息
+	jtest.查询出所有经理的ID
+	SELECT DISTINCT mgr FROM emp;
+	2. 查出经理的信息,只要id在第一步的查询结果中就可以了
+	SELECT * FROM emp,(SELECT DISTINCT mgr FROM emp) mgrs WHERE emp.empno = mgrs.mgr;
+	-- where 接子查询
+	-- 薪资高于10号部门平均工资的所有员工信息
+	jtest.查询出10号部门的平均工资
+	SELECT AVG(sal) FROM emp WHERE deptno=10;
+	2.得出结果:
+	SELECT * FROM emp WHERE sal > (SELECT AVG(sal) FROM emp WHERE deptno=10);
+	-- having后面接子查询
+	-- 有哪些部门的平均工资高于30号部门的平均工资
+	jtest.30号部门的平均工资
+	SELECT AVG(sal) FROM emp WHERE deptno=30;
+	2. 统计所有部门的平均工资
+	SELECT deptno,AVG(sal) FROM emp GROUP BY deptno ;
+	3. 得出最终的结果
+		SELECT deptno,AVG(sal) FROM emp GROUP BY deptno HAVING AVG(sal) > (SELECT AVG(sal) FROM emp WHERE deptno=30);
+		
+
+-- 工资>JONES工资的员工信息
+	jtest.查处JONES的工资信息
+	SELECT sal FROM emp WHERE ename='JONES';
+	2.得出结果
+	SELECT * FROM emp WHERE sal > (SELECT sal FROM emp WHERE ename='JONES');
+-- 查询与SCOTT同一个部门的员工
+	jtest.查处SCOTT的部门编号
+	SELECT deptno FROM emp WHERE ename = 'SCOTT';
+	2.得出结果
+	SELECT * FROM emp WHERE deptno = (SELECT deptno FROM emp WHERE ename = 'SCOTT');
+-- 工资高于30号部门所有人的员工信息
+	jtest.得出30号部门的最大工资
+	SELECT MAX(sal) FROM emp WHERE deptno = 30;
+	2.得出结果
+	SELECT * FROM emp WHERE sal > (SELECT MAX(sal) FROM emp WHERE deptno = 30);
+-- 查询工作和工资与MARTIN完全相同的员工信息
+	jtest.查处MARTIN的工作和工资
+	SELECT job,sal FROM emp WHERE ename='MARTIN';
+	2.得出结果
+	SELECT * FROM emp WHERE (job,sal) IN (SELECT job,sal FROM emp WHERE ename='MARTIN');
+-- 有两个以上直接下属的员工信息
+	jtest.查出emp表中mgr信息
+	SELECT mgr FROM emp;
+	2.分组统计mgr的信息
+	SELECT mgr,COUNT(*) FROM emp GROUP BY mgr HAVING COUNT(*)>2;
+	3.得出结果
+	SELECT * FROM emp e1 WHERE e1.empno IN (SELECT e2.mgr FROM emp e2 GROUP BY e2.mgr HAVING COUNT(*)>2);
+-- 查询员工编号为7788的员工名称,员工工资,部门名称,部门地址
+	jtest.将员工表和部门表链接起来
+	SELECT * FROM emp ,dept WHERE emp.deptno = dept.deptno;
+	2.得出ID为7788的所有信息
+	SELECT * FROM emp ,dept WHERE emp.deptno = dept.deptno AND empno=7788;
+	3.只显示其中的需要的信息
+	SELECT ename,sal ,dname, loc FROM emp ,dept WHERE emp.deptno = dept.deptno AND empno=7788;
+
+-- jtest. 查询出高于本部门平均工资的员工信息
+	jtest. 分组统计每个部门的平均工资
+	SELECT deptno,AVG(sal) FROM emp GROUP BY deptno;
+	2. 得出相应的结果
+	SELECT * FROM emp e1 WHERE e1.sal > (SELECT AVG(e2.sal) FROM emp e2 WHERE e1.deptno=e2.deptno  GROUP BY e2.deptno);
+	
+
+-- jtest. 列出达拉斯加工作的人中,比纽约平均工资高的人
+	0. 查处DALLAS 的部门编号
+	SELECT deptno FROM dept WHERE loc='DALLAS';
+	jtest.查处达拉斯工作的人的信息
+	SELECT * FROM emp WHERE deptno = (SELECT deptno FROM dept WHERE loc='DALLAS');
+	2. 查处纽约的部门编号
+	SELECT deptno FROM dept WHERE loc='NEW YORK';
+	3. 查村纽约平均工资
+	SELECT AVG(sal) FROM emp WHERE deptno = (SELECT deptno FROM dept WHERE loc='NEW YORK');
+	4.得出结果:
+	SELECT * FROM emp WHERE deptno = (SELECT deptno FROM dept WHERE loc='DALLAS')
+	AND sal > (SELECT AVG(sal) FROM emp WHERE deptno = (SELECT deptno FROM dept WHERE loc='NEW YORK'));
+	
+	
+
+-- 2. 查询7369员工编号,姓名,经理编号和经理姓名
+	SELECT e1.empno,e1.ename,e1.mgr,mgrtable.ename FROM emp e1,emp mgrtable WHERE e1.mgr = mgrtable.empno; 
+	
+-- 3. 查询出各个部门薪水最高的员工所有信息
+	jtest.分组统计每个部门员工最高的薪资是多少
+	SELECT MAX(sal),deptno FROM emp GROUP BY deptno;
+	2.算出结果
+	SELECT * FROM emp e1 WHERE e1.sal = (SELECT MAX(sal) FROM emp e2 WHERE e1.deptno = e2.deptno GROUP BY deptno);
+	
+	
+CREATE TABLE test(
+  NAME CHAR(20),
+  kecheng CHAR(20),
+  fenshu CHAR(20)
+);
+
+INSERT INTO test VALUES
+('张三','语文',81),
+('张三','数学',75),
+('李四','语文',76),
+('李四','数学',90),
+('王五','语文',81),
+('王五','数学',82);
+
+
+SELECT NAME FROM test WHERE fenshu < 80 ;
+SELECT NAME FROM test WHERE NAME NOT IN(SELECT NAME FROM test WHERE fenshu < 80 );
+
+
+set names gbk; 改变cmd编码方式
+
+mysql -uroot -proot
+
+show databases;
+
+use day02;
+
+show tables;
+
+select * from student;
+
+delete from table student where
+
+商品分类:
+jtest.分类的ID
+
+2.分类名称
+
+3.分类描述
+
+create table category(
+
+cid int primary key auto_increment,
+
+cname varchar(10),
+
+cdesc varchar(31)
+
+)
+
+insert into category values(null, '手机数码', '电子厂品,黑马生产');
+
+insert into category values(null, '鞋靴箱包', '江南皮革厂倾情打造');
+
+insert into category values(null, '香烟酒水', '黄鹤楼,茅台,二锅头');
+
+insert into category values(null, '酸奶饼干', '娃哈哈,蒙牛酸酸乳');
+
+insert into category values(null, '馋嘴零食', '瓜子花生,八宝粥');
+
+
+
+所有商品
+
+jtest.商品ID
+
+2.商品名称
+
+3.商品的价格
+
+4.生产价格
+
+5.商品分类ID
+
+
+
+商品和商品分类:所属关系
+
+
+
+create table product(
+
+pid int primary key auto_increment,
+
+pname varchar(10),
+
+price double,
+
+pdate timestamp,
+
+cno int
+
+);
+
+//timestamp默认当前时间
+
+
+
+insert into product value(null,'小米mix8',998,null,jtest);
+
+insert into product value(null,'锤子',2888,null,jtest);
+
+insert into product value(null,'老村长',5,null,3);
+
+insert into product value(null,'劲酒',35,null,3);
+
+insert into product value(null,'小熊饼干',jtest,null,4);
+
+insert into product value(null,'薯片',5,null,5);
+
+insert into product value(null,'旺旺大饼',jtest,null,5);
+
+
+
+查询所有的商品 select选择显示哪些列的内容
+
+select * from product;
+
+查询商品名称和商品价格
+
+select pname, price from product;
+
+
+
+别名查询: as的关键字 as关键字可以省略
+
+表别名
+
+select p.pname, p.price from product as p;
+
+列别名
+
+select pname as 商品名称, price as 商品价格 from product;
+
+
+
+去掉重复的值
+
+查询商品的所有的价格
+
+select price from product;
+
+select distinct price from product;
+
+
+
+select运算查询 *代表所有的列(仅仅在所有查询结果上做了运算+ - * /)
+
+select *, price*jtest.5 as 折后价 from product;
+
+
+
+条件查询(where 关键字)
+
+指定条件,确定要操作的记录
+
+
+
+查询商品价格>60元的所有商品信息 
+
+select * from product where price>60;
+
+
+
+关系运算符:>  >=  <  <=  !=  
+
+<> : 不等于 标准sql语法
+
+!= : 非标准
+
+ 大于小于 >10 and <100 或 select * from product where price between 10 and 100
+
+
+
+逻辑运算: and or not
+
+
+
+
+
+复杂查询
+
+like: 模糊查询
+
+-: 代表的是一个字符
+
+%: 代表的是多个字符
+
+
+
+查询出名字中带有饼的所有商品  '%饼%'
+
+select * from product where pname like '%饼%';  //不论第几个
+
+查询第三个名字是饼的所有商品 '__饼%'
+
+select * from product where pname like '__饼%'; //第二个字
+
+
+
+in 在某个范围中获得值
+
+查询出商品分类ID在1,4,5里面的所有商品
+
+select * from product where cno in (jtest,4,5);
+
+
+
+排序查询:order by 关键字 方式
+
+asc:升序(默认)
+
+desc: 降序
+
+查询所有商品,按照价格进行排序
+
+select * from product order by price desc;
+
+查询名称中有 小 的商品,按价格降序排序
+
+jtest.
+
+select * from product where pname like '%小%';
+
+2.排序 
+
+select * from product where pname like '%小% order by;
+
+
+
+聚合函数
+
+sum() :求和
+
+avg() :求平均值
+
+count: 统计数量
+
+max: 最大值
+
+min: 最小值
+
+jtest.获得所有商品价格总和:
+select sum(price) from product;
+
+2.获得所有商品价格平均价格:
+
+select avg(price) from product;
+
+3.获得所有商品的个数
+
+select count(*) from product;
+
+注意: where条件后面不能接聚合函数
+
+select * from product where price > avg(price);
+
+4.查出商品价格大于平均价格的所有商品
+
+.查出所有商品
+
+select * from product;
+
+平均价格
+
+select avg(price) from product;
+
+子查询
+
+select * from product where price > (select avg(price) from product);
+
+
+
+
+
+分组: group by 
+
+jtest.根据cno字段分组,分组后统计结果  -根据每组元素个数
+
+select cno, count(*) from product group by cno;
+
+2.根据cno分组,分组后统计每组商品的平均价格,并且商品平均价格>60
+
+select cno, avg(price) 
+
+from product group by cno 
+
+having avg(price) > 60;
+
+having关键字,可以接聚合函数,出现在分组之后
+
+where关键字后不可接聚合函数,出现在分组前
+
+
+
+selectl编写顺序
+
+S F W G H O
+
+select ...from...where...group by...having...order by
+
+执行顺序
+
+F...W...G...H...S...O
+
+from...where...group by...having...select...order by
+
+从哪张表 条件判断 对表分组 条件筛选 控制显示的 结果排序
+
+
+
+
+
+```sql
+create table category(
+
+cid int primary key auto_increment,
+
+cname varchar(10),
+
+cdesc varchar(31)
+
+);
+
+insert into category values(null, '手机数码', '电子厂品,黑马生产');
+
+insert into category values(null, '鞋靴箱包', '江南皮革厂倾情打造');
+
+insert into category values(null, '香烟酒水', '黄鹤楼,茅台,二锅头');
+
+insert into category values(null, '酸奶饼干', '娃哈哈,蒙牛酸酸乳');
+
+insert into category values(null, '馋嘴零食', '瓜子花生,八宝粥');
+
+
+create table product(
+
+pid int primary key auto_increment,
+
+pname varchar(10),
+
+price double,
+
+pdate timestamp,
+
+cno int
+
+);
+
+
+insert into product value(null,'小米mix8',998,null,jtest);
+
+insert into product value(null,'锤子',2888,null,jtest);
+
+insert into product value(null,'老村长',5,null,3);
+
+insert into product value(null,'劲酒',35,null,3);
+
+insert into product value(null,'小熊饼干',jtest,null,4);
+
+insert into product value(null,'薯片',5,null,5);
+
+insert into product value(null,'旺旺大饼',jtest,null,5);
+//插入数据会失败	
+insert into product value(null,'充气的',jtest,null,12);
+```
+
+
+
+多表之间关系如何来维护?
+外键约束: foreign key
+
+alter table product add foreign key(cno) references category(cid);
+
+
+
+网上商城市里的分析:用户购物流程
+
+用户表(用户的ID,用户名,密码,手机)
+
+```sql
+create table user(
+    uid int primary key auto_increment,
+    username varchar(31),
+    password varchar(31),
+    phone varchar(11)
+);
+
+insert into user values(jtest,'zhangsan','123','13811118833')
+
+
+```
+
+订单表(订单编号,总价,订单时间,地址,外键用户的ID)
+
+```sql
+create table orders(
+    oid int primary key auto_increment,
+    sum int not null,
+    otime timestamp,
+    address varchar(100),
+    uno int,
+    foreign key(uno) references user(uid)
+);
+
+insert into orders values(jtest,200,null,'黑马前台旁边小黑屋',jtest);
+insert into orders values(2,250,null,'黑马后台旁边1702',jtest);
+
+
+
+create table company(
+    companyid varchar(20) primary key,
+    
+)
+
+cerate table BandAccount(
+    Account varchar(20) primary key,
+    uno,         //一个公司对应多个银行账号，属于一对多关系
+    useece          //不同业务类型使用不同的银行账号，属于1对1关系
+    foreign key(uno) reference company(companyid)
+    
+)
+
+jtest.查询公司C
+seclet * from company where company = c;
+2.查询C的所有银行账号
+select * from BandAccount where uno = (seclet * from company where company = 'c');
+3.查询C在业务类型A下的所有银行账号
+select * from BandAccount where uno = (seclet * from company where company = 'c') uscene='A';
+
+
+```
+
+
+
+商品表(商品ID,商品名称,商品价格,外键cno)
+
+```sql
+create table product(
+    pid int primary key auto_increment,
+    pname varchar(10),
+    price double,
+    cno int,
+    foreign key(cno) references category(cid)
+   );
+   
+insert into product value(null,'小米mix8',998,jtest);
+
+insert into product value(null,'锤子',2888,jtest);
+
+insert into product value(null,'老村长',5,3);
+
+insert into product value(null,'劲酒',35,3);
+
+insert into product value(null,'小熊饼干',jtest,4);
+
+insert into product value(null,'薯片',5,5);
+
+insert into product value(null,'旺旺大饼',jtest,5);
+
+
+
+
+商品分类表(分类ID,分类名称,分类描述)
+sql
+create table category(
+    cid int primary key auto_increment,
+    cname varchar(15),
+    cdesc varchar(100)
+);
+insert into category values(null, '手机数码', '电子厂品,黑马生产');
+
+insert into category values(null, '鞋靴箱包', '江南皮革厂倾情打造');
+
+insert into category values(null, '香烟酒水', '黄鹤楼,茅台,二锅头');
+
+insert into category values(null, '酸奶饼干', '娃哈哈,蒙牛酸酸乳');
+
+insert into category values(null, '馋嘴零食', '瓜子花生,八宝粥');
+
+
+```
+
+订单项:中间表(订单ID,商品ID,商品数量,订单项总价)
+
+//名字不重复
+
+```sql
+create table orderitem(
+    ono int,   
+    pno int,
+    foreign key(ono) references orders(oid),
+    foreign key(pno) references product(pid),
+    ocount int,
+    subsum double
+);
+
+--给1号订单添加商品 200块钱商品
+insert into orderitem values(jtest,7,100,100);
+insert into orderitem values(jtest,5,20,100);
+
+--给2号订单添加商品 250块钱商品
+insert into orderitem values(2,4,jtest,35);
+insert into orderitem values(2,5,10,50);
+
+
+
+
+
+
+
+
+
